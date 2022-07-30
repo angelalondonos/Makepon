@@ -1,6 +1,8 @@
 let ataqueJugador
 let ataqueEnemigo
 let resultado
+let vidasJugador = 3
+let vidasEnemigo = 3
 
 window.addEventListener('load', iniciarJuego)
 
@@ -16,6 +18,9 @@ let botonAgua=document.getElementById('boton-agua')
 botonAgua.addEventListener('click',ataqueAgua)
 let botonTierra=document.getElementById('boton-tierra')
 botonTierra.addEventListener('click',ataqueTierra)
+let botonReiniciar=document.getElementById('boton-reiniciar')
+botonReiniciar.addEventListener('click', reiniciarJuego)
+
 }
 
 /* Esta funcion permite saber que mascota eligió el jugador */
@@ -91,17 +96,54 @@ function crearMensaje(){
 
 /* Función que permite verificar el resultado del combate entre el jugador y el enemigo */
 function combate(){
-    if(ataqueEnemigo == 'FUEGO' && ataqueJugador == 'TIERRA' || ataqueEnemigo == 'AGUA' && ataqueJugador == 'FUEGO' || ataqueEnemigo == 'TIERRA' && ataqueJugador == 'AGUA'){
-        resultado = 'Ganaste!!'
-    }else  if(ataqueEnemigo == ataqueJugador){
-        resultado = 'Empate!!'
-    }else {
-        resultado = 'Perdiste' 
-    }
-
-    crearMensaje()
+    let spanVidasJugador = document.getElementById('vidas-jugador')
+    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
+    
+        if(ataqueEnemigo == 'FUEGO' && ataqueJugador == 'TIERRA' || ataqueEnemigo == 'AGUA' && ataqueJugador == 'FUEGO' || ataqueEnemigo == 'TIERRA' && ataqueJugador == 'AGUA'){
+            resultado = 'Ganaste!!'
+            vidasEnemigo --
+            spanVidasEnemigo.innerHTML = vidasEnemigo
+            crearMensaje()
+        }else  if(ataqueEnemigo == ataqueJugador){
+            resultado = 'Empate!!'
+            crearMensaje()
+        }else {
+            resultado = 'Perdiste' 
+            vidasJugador --
+            spanVidasJugador.innerHTML = vidasJugador 
+            crearMensaje()
+        }
+        
+        revisarVidas()
+}
+/* Función que permite verificar que el jugador o el enemigo tengan 0 vidas para parar el juego */
+function revisarVidas(){
+        if(vidasEnemigo == 0){
+            crearMensajeFinal('✨FELICITACIONES G A N A S T E!! ✨')
+        } else if(vidasJugador == 0){
+            crearMensajeFinal('Lo siente, perdiste ☹')
+        }
 }
 
+/* Función que permite enviar el mensaje final de la partida al HTML */
+function crearMensajeFinal(resultadoFinal){
+    let sectioMensaje = document.getElementById('mensajes')
+    let parrafoFinal = document.createElement('p')
+    
+    parrafoFinal.innerHTML = resultadoFinal
+    sectioMensaje.appendChild(parrafoFinal)
+
+    let botonFuego=document.getElementById('boton-fuego')
+    botonFuego.disabled = true
+    let botonAgua=document.getElementById('boton-agua')
+    botonAgua.disabled = true
+    let botonTierra=document.getElementById('boton-tierra')
+    botonTierra.disabled = true
+}
+
+function reiniciarJuego(){
+    location.reload()
+}
 /* Crear mascota aleatoria para el enemigo */
 function aleatorio(min,max){
     return Math.floor(Math.random()* (max - min + 1)+min)
