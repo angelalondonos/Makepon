@@ -9,22 +9,33 @@ window.addEventListener('load', iniciarJuego)
 
 /* Carga los elementos del HTML */
 function iniciarJuego(){
-//Declaración de variables definidas en el HTML
-let btnMascota = document.getElementById('boton-mascota')
-btnMascota.addEventListener('click', seleccionarMascotaJugador)
-let botonFuego=document.getElementById('boton-fuego')
-botonFuego.addEventListener('click',ataqueFuego)
-let botonAgua=document.getElementById('boton-agua')
-botonAgua.addEventListener('click',ataqueAgua)
-let botonTierra=document.getElementById('boton-tierra')
-botonTierra.addEventListener('click',ataqueTierra)
-let botonReiniciar=document.getElementById('boton-reiniciar')
-botonReiniciar.addEventListener('click', reiniciarJuego)
 
+    //Ocultar las secciones 
+    let sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
+    sectionSeleccionarAtaque.style.display='none'
+    let sectionReiniciar=document.getElementById('reiniciar')
+    sectionReiniciar.style.display='none'
+
+    //Declaración de variables definidas en el HTML
+    let btnMascota = document.getElementById('boton-mascota')
+    btnMascota.addEventListener('click', seleccionarMascotaJugador)
+    let botonFuego=document.getElementById('boton-fuego')
+    botonFuego.addEventListener('click',ataqueFuego)
+    let botonAgua=document.getElementById('boton-agua')
+    botonAgua.addEventListener('click',ataqueAgua)
+    let botonTierra=document.getElementById('boton-tierra')
+    botonTierra.addEventListener('click',ataqueTierra)
+    let botonReiniciar=document.getElementById('boton-reiniciar')
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 /* Esta funcion permite saber que mascota eligió el jugador */
 function seleccionarMascotaJugador(){
+    let sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
+    sectionSeleccionarAtaque.style.display='block'
+    let sectionSeleccionarMascota=document.getElementById('seleccionar-mascota')
+    sectionSeleccionarMascota.style.display='none'
+
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapepo = document.getElementById('capipepo')
     let inputRatigueya = document.getElementById('ratigueya')
@@ -139,6 +150,10 @@ function crearMensajeFinal(resultadoFinal){
     botonAgua.disabled = true
     let botonTierra=document.getElementById('boton-tierra')
     botonTierra.disabled = true
+
+    let sectionReiniciar=document.getElementById('reiniciar')
+    sectionReiniciar.style.display='block'
+
 }
 
 function reiniciarJuego(){
