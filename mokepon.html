@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Press+Start+2P&display=swap" rel="stylesheet"></head>
 <body>
      <section id="seleccionar-mascota">
-        <h1>🌱💧🔥 MOKEPON! 🔥💧🌱</h1>
+        <h1>MOKEPON</h1>
 
         <h2>Elige tu mascota</h2>
         <div class="tarjetas">
@@ -37,7 +37,7 @@
     </section>
 
     <section id="seleccionar-ataque">
-        <h1>🌱💧🔥 MOKEPON! 🔥💧🌱</h1>
+        <h1>MOKEPON</h1>
         <h2>Elige tu ataque</h2>
         <div class="tarjeta-ataque">
             <button class="boton-ataque" id="boton-fuego">Fuego 🔥</button>
@@ -53,14 +53,18 @@
             </section>
         </div>
 
-        <div>
-            <div id = ataques-jugador></div>
-            <div id = ataque-enemigo></div>
-            <P>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</P>
-            <p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span id="vidas-enemigo">3</span> vidas</p>    
-        </div>
-         
+        <div class="ataque">
+            <div class="ataque-jugador">
+                <p id="mascota-jugador"></p>
+                <p id="vidas-jugador">3</p>
+                <div id = ataques-jugador></div>
+            </div>
+            <div class="ataque-enemigo">
+                <p id="mascota-enemigo"></p>
+                <p id="vidas-enemigo">3</p>
+                <div id = ataque-enemigo></div>
+            </div>
+        </div>     
     </section>
-
 </body>
 </html>
