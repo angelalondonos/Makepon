@@ -1,3 +1,23 @@
+const sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
+const sectionReiniciar=document.getElementById('reiniciar') 
+const btnMascota = document.getElementById('boton-mascota')
+const botonFuego=document.getElementById('boton-fuego')
+const botonAgua=document.getElementById('boton-agua')
+const botonTierra=document.getElementById('boton-tierra')
+const botonReiniciar=document.getElementById('boton-reiniciar')
+const sectionSeleccionarMascota=document.getElementById('seleccionar-mascota')
+const inputHipodoge = document.getElementById('hipodoge')
+const inputCapepo = document.getElementById('capipepo')
+const inputRatigueya = document.getElementById('ratigueya')
+const spanMascotaJugador = document.getElementById('mascota-jugador')
+const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+const spanVidasJugador = document.getElementById('vidas-jugador')
+const spanVidasEnemigo = document.getElementById('vidas-enemigo')
+const sectioMensaje = document.getElementById('resultado')
+const ataqueDelJugador = document.getElementById('ataques-jugador')
+const ataqueDelEnemigo = document.getElementById('ataque-enemigo')
+
+let mokepones=[]
 let ataqueJugador
 let ataqueEnemigo
 let resultado
@@ -6,41 +26,36 @@ let vidasEnemigo = 3
 
 window.addEventListener('load', iniciarJuego)
 
+class Mokepon{
+    constructor(nombre,foto,vida){
+        this.nombre=nombre
+        this.foto=foto
+        this.vida=vida
+    }
+}
 
+let hipodoge=new Mokepon('Hipodoge','./imagenes/hipodoge.webp',5)
+let capipepo=new Mokepon('Capipepo','./imagenes/capipepo.webp',5)
+let ratigueya=new Mokepon('Ratigueya','./imagenes/ratigueya.webp',5)
+
+
+mokepones.push(hipodoge, capipepo, ratigueya)
+console.log(mokepones)
 /* Carga los elementos del HTML */
 function iniciarJuego(){
-
-    //Ocultar las secciones 
-    let sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
-    sectionSeleccionarAtaque.style.display='none'
-    let sectionReiniciar=document.getElementById('reiniciar')
     sectionReiniciar.style.display='none'
-
-    //Declaración de variables definidas en el HTML
-    let btnMascota = document.getElementById('boton-mascota')
+    sectionSeleccionarAtaque.style.display='none'
     btnMascota.addEventListener('click', seleccionarMascotaJugador)
-    let botonFuego=document.getElementById('boton-fuego')
     botonFuego.addEventListener('click',ataqueFuego)
-    let botonAgua=document.getElementById('boton-agua')
     botonAgua.addEventListener('click',ataqueAgua)
-    let botonTierra=document.getElementById('boton-tierra')
     botonTierra.addEventListener('click',ataqueTierra)
-    let botonReiniciar=document.getElementById('boton-reiniciar')
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 /* Esta funcion permite saber que mascota eligió el jugador */
-function seleccionarMascotaJugador(){
-    let sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
-    sectionSeleccionarAtaque.style.display='flex'
-    let sectionSeleccionarMascota=document.getElementById('seleccionar-mascota')
+function seleccionarMascotaJugador(){ 
+    sectionSeleccionarAtaque.style.display='flex'  
     sectionSeleccionarMascota.style.display='none'
-
-    let inputHipodoge = document.getElementById('hipodoge')
-    let inputCapepo = document.getElementById('capipepo')
-    let inputRatigueya = document.getElementById('ratigueya')
-    let spanMascotaJugador = document.getElementById('mascota-jugador')
-
     if(inputHipodoge.checked){
         spanMascotaJugador.innerHTML= 'Hipodoge'
     }else if(inputCapepo.checked){
@@ -56,7 +71,6 @@ function seleccionarMascotaJugador(){
 /* Esta funcion permite saber que mascota eligió el enemigo */
 function seleccionarMascotaEnemigo(){
     let mascotaAleatorio = aleatorio(1,3)
-    let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 
     if(mascotaAleatorio==1){
         spanMascotaEnemigo.innerHTML= 'Hipodoge'
@@ -98,9 +112,6 @@ function ataqueAleatorioEnemigo(){
 
 /* Funcón que permite enviar los mesajes del estado del juego al HTML */
 function crearMensaje(){
-    let sectioMensaje = document.getElementById('resultado')
-    let ataqueDelJugador = document.getElementById('ataques-jugador')
-    let ataqueDelEnemigo = document.getElementById('ataque-enemigo')
 
     let nuevoAtaqueDelJugador = document.createElement('p')
     let nuevoAtaqueDelEnemigo = document.createElement('p')
@@ -117,9 +128,7 @@ function crearMensaje(){
 
 /* Función que permite verificar el resultado del combate entre el jugador y el enemigo */
 function combate(){
-    let spanVidasJugador = document.getElementById('vidas-jugador')
-    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
-    
+   
         if(ataqueEnemigo == 'FUEGO' && ataqueJugador == 'TIERRA' || ataqueEnemigo == 'AGUA' && ataqueJugador == 'FUEGO' || ataqueEnemigo == 'TIERRA' && ataqueJugador == 'AGUA'){
             resultado = 'Ganaste!!'
             vidasEnemigo --
@@ -133,8 +142,7 @@ function combate(){
             vidasJugador --
             spanVidasJugador.innerHTML = vidasJugador 
             crearMensaje()
-        }
-        
+        } 
         revisarVidas()
 }
 /* Función que permite verificar que el jugador o el enemigo tengan 0 vidas para parar el juego */
@@ -148,19 +156,12 @@ function revisarVidas(){
 
 /* Función que permite enviar el mensaje final de la partida al HTML */
 function crearMensajeFinal(resultadoFinal){
-    let sectioMensaje = document.getElementById('resultado')
-    
+        
     sectioMensaje.innerHTML = resultadoFinal
-
-    let botonFuego=document.getElementById('boton-fuego')
-    botonFuego.disabled = true
-    let botonAgua=document.getElementById('boton-agua')
-    botonAgua.disabled = true
-    let botonTierra=document.getElementById('boton-tierra')
-    botonTierra.disabled = true
-
-    let sectionReiniciar=document.getElementById('reiniciar')
-    sectionReiniciar.style.display='block'
+        botonFuego.disabled = true
+        botonAgua.disabled = true
+        botonTierra.disabled = true
+        sectionReiniciar.style.display='block'
 
 }
 
