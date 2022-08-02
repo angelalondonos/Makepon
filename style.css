@@ -1,6 +1,69 @@
+:root{
+    --primario: #4db1ff;
+    --secundario: #A66CFF;
+    --fondo: #eae4f88c;
+}
+
+body{
+    background-color: var(--fondo);
+    font-family: 'Fredoka One', cursive;
+}
+
 h1{
-    color:hotpink;
-    width:310px;
-    height:50px;
-    background-color:teal;
+    color: var(--secundario);
+    font-size: xx-large;
+    font-family: 'Press Start 2P', cursive;
+}
+
+h2{
+    color: var(--primario);
+    font-size: 28px;
+}
+
+input{
+    display: none;
+}
+
+#seleccionar-mascota{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tarjeta-mokepon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border: 2px solid var(--secundario);
+    border-radius: 5%;
+    margin: 10px;
+    background-color: var(--fondo);
+    color: var(--secundario);
+}
+
+.tarjeta-mokepon img{
+    width: 80px;
+}
+
+.tarjetas{
+    display: flex;
+}
+
+.boton-principal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 224px;
+    height: 50px;
+    border: 0px;
+    border-radius: 20px;
+    margin: 10px;
+    background-color: var(--primario);
+    color: #ffffff;
+    font-family: 'Fredoka One', cursive;
 }
