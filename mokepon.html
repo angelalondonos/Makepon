@@ -39,21 +39,23 @@
     <section id="seleccionar-ataque">
         <h1>🌱💧🔥 MOKEPON! 🔥💧🌱</h1>
         <h2>Elige tu ataque</h2>
-        <div>
-            <button id="boton-fuego">Fuego 🔥</button>
-            <button id="boton-agua">Agua 💧</button>
-            <button id="boton-tierra">Tierra 🌱</button> 
+        <div class="tarjeta-ataque">
+            <button class="boton-ataque" id="boton-fuego">Fuego 🔥</button>
+            <button class="boton-ataque" id="boton-agua">Agua 💧</button>
+            <button class="boton-ataque" id="boton-tierra">Tierra 🌱</button> 
         </div>
 
-        <div>
-            <section id="mensajes"></section>
 
+        <div id="mensajes">
+            <p id = resultado>Muchas suerte</p>
             <section id="reiniciar">
                 <button id="boton-reiniciar">Reiniciar</button>
             </section>
         </div>
 
         <div>
+            <div id = ataques-jugador></div>
+            <div id = ataque-enemigo></div>
             <P>Tu mascota <span id="mascota-jugador"></span> tiene <span id="vidas-jugador">3</span> vidas</P>
             <p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span id="vidas-enemigo">3</span> vidas</p>    
         </div>

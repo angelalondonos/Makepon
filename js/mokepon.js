@@ -32,7 +32,7 @@ function iniciarJuego(){
 /* Esta funcion permite saber que mascota eligió el jugador */
 function seleccionarMascotaJugador(){
     let sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
-    sectionSeleccionarAtaque.style.display='block'
+    sectionSeleccionarAtaque.style.display='flex'
     let sectionSeleccionarMascota=document.getElementById('seleccionar-mascota')
     sectionSeleccionarMascota.style.display='none'
 
@@ -98,11 +98,21 @@ function ataqueAleatorioEnemigo(){
 
 /* Funcón que permite enviar los mesajes del estado del juego al HTML */
 function crearMensaje(){
-    let sectioMensaje = document.getElementById('mensajes')
-    let parrafo = document.createElement('p')
-    
-    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ' y la mascota del enemigo atacó con ' + ataqueEnemigo + '.'+ resultado
-    sectioMensaje.appendChild(parrafo)
+    let sectioMensaje = document.getElementById('resultado')
+    let ataqueDelJugador = document.getElementById('ataques-jugador')
+    let ataqueDelEnemigo = document.getElementById('ataque-enemigo')
+
+    let nuevoAtaqueDelJugador = document.createElement('p')
+    let nuevoAtaqueDelEnemigo = document.createElement('p')
+
+    sectioMensaje.innerHTML = resultado
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+   
+    ataqueDelJugador.appendChild(nuevoAtaqueDelJugador)
+    ataqueDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
+
+
 }
 
 /* Función que permite verificar el resultado del combate entre el jugador y el enemigo */
@@ -132,17 +142,15 @@ function revisarVidas(){
         if(vidasEnemigo == 0){
             crearMensajeFinal('✨FELICITACIONES G A N A S T E!! ✨')
         } else if(vidasJugador == 0){
-            crearMensajeFinal('Lo siente, perdiste ☹')
+            crearMensajeFinal('Lo siento, perdiste ☹')
         }
 }
 
 /* Función que permite enviar el mensaje final de la partida al HTML */
 function crearMensajeFinal(resultadoFinal){
-    let sectioMensaje = document.getElementById('mensajes')
-    let parrafoFinal = document.createElement('p')
+    let sectioMensaje = document.getElementById('resultado')
     
-    parrafoFinal.innerHTML = resultadoFinal
-    sectioMensaje.appendChild(parrafoFinal)
+    sectioMensaje.innerHTML = resultadoFinal
 
     let botonFuego=document.getElementById('boton-fuego')
     botonFuego.disabled = true
