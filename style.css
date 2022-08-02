@@ -24,6 +24,11 @@ input{
     display: none;
 }
 
+input:checked + label{
+    background: var(--secundario);
+    color: white;
+}
+
 #seleccionar-mascota, #seleccionar-ataque{
     height: 100vh;
     display: flex;
@@ -110,7 +115,6 @@ input{
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 @media (max-width:600px) {
