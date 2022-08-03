@@ -14,23 +14,7 @@
         <h1>MOKEPON</h1>
 
         <h2>Elige tu mascota</h2>
-        <div class="tarjetas">
-            <input type="radio" name="mascota" id="hipodoge" /> 
-            <label class="tarjeta-mokepon" for="hipodoge">
-                <img src="./imagenes/hipodoge.webp" alt="Hipodoge">
-                <p>Hipodoge</p>
-            </label>
-            <input type="radio" name="mascota" id="capipepo" />
-            <label class="tarjeta-mokepon"for="capipepo">
-                <img src="./imagenes/capipepo.webp" alt="Capipepo">
-                <p>Capipepo</p>
-            </label>
-            <input type="radio" name="mascota" id="ratigueya" />  
-            <label class="tarjeta-mokepon"for="ratigueya">
-                <img src="./imagenes/ratigueya.webp" alt="Ratigueya">
-                <p>Ratigueya</p>
-            </label>
-           
+        <div class="tarjetas" id="contenedor-tarjetas">
         </div>
         <button class="boton-principal" id="boton-mascota">Seleccionar</button>
 
@@ -45,7 +29,6 @@
             <button class="boton-ataque" id="boton-tierra">Tierra 🌱</button> 
         </div>
 
-
         <div id="mensajes">
             <p id = resultado>Muchas suerte</p>
             <section id="reiniciar">
@@ -55,13 +38,13 @@
 
         <div class="ataque">
             <div class="ataque-jugador">
-                <p id="mascota-jugador"></p>
                 <p id="vidas-jugador">3</p>
+                <p id="mascota-jugador"></p>
                 <div id = ataques-jugador></div>
             </div>
             <div class="ataque-enemigo">
-                <p id="mascota-enemigo"></p>
                 <p id="vidas-enemigo">3</p>
+                <p id="mascota-enemigo"></p>
                 <div id = ataque-enemigo></div>
             </div>
         </div>     

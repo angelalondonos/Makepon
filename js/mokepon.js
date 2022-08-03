@@ -6,9 +6,6 @@ const botonAgua=document.getElementById('boton-agua')
 const botonTierra=document.getElementById('boton-tierra')
 const botonReiniciar=document.getElementById('boton-reiniciar')
 const sectionSeleccionarMascota=document.getElementById('seleccionar-mascota')
-const inputHipodoge = document.getElementById('hipodoge')
-const inputCapepo = document.getElementById('capipepo')
-const inputRatigueya = document.getElementById('ratigueya')
 const spanMascotaJugador = document.getElementById('mascota-jugador')
 const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 const spanVidasJugador = document.getElementById('vidas-jugador')
@@ -16,13 +13,19 @@ const spanVidasEnemigo = document.getElementById('vidas-enemigo')
 const sectioMensaje = document.getElementById('resultado')
 const ataqueDelJugador = document.getElementById('ataques-jugador')
 const ataqueDelEnemigo = document.getElementById('ataque-enemigo')
+const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
 
 let mokepones=[]
 let ataqueJugador
 let ataqueEnemigo
 let resultado
+let opcionDeMokepones
 let vidasJugador = 3
 let vidasEnemigo = 3
+let inputHipodoge
+let mascotaJugador
+let inputCapepo 
+let inputRatigueya 
 
 window.addEventListener('load', iniciarJuego)
 
@@ -31,6 +34,7 @@ class Mokepon{
         this.nombre=nombre
         this.foto=foto
         this.vida=vida
+        this.ataques=[]
     }
 }
 
@@ -38,13 +42,52 @@ let hipodoge=new Mokepon('Hipodoge','./imagenes/hipodoge.webp',5)
 let capipepo=new Mokepon('Capipepo','./imagenes/capipepo.webp',5)
 let ratigueya=new Mokepon('Ratigueya','./imagenes/ratigueya.webp',5)
 
+hipodoge.ataques.push(
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
 
-mokepones.push(hipodoge, capipepo, ratigueya)
-console.log(mokepones)
+capipepo.ataques.push(
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '🌱', id: 'boton-tierra' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🔥', id: 'boton-fuego' },
+)
+
+ratigueya.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+mokepones.push(hipodoge,capipepo,ratigueya)
+
+
 /* Carga los elementos del HTML */
 function iniciarJuego(){
     sectionReiniciar.style.display='none'
     sectionSeleccionarAtaque.style.display='none'
+
+    mokepones.forEach((mokepon) =>{
+        opcionDeMokepones = `
+        <input type="radio" name="mascota" id=${mokepon.nombre} /> 
+        <label class="tarjeta-mokepon" for=${mokepon.nombre}>
+            <img src=${mokepon.foto}>
+            <p>${mokepon.nombre}</p>
+        </label>
+        `
+        contenedorTarjetas.innerHTML += opcionDeMokepones
+        inputHipodoge = document.getElementById('Hipodoge')
+        inputCapepo = document.getElementById('Capipepo')
+        inputRatigueya = document.getElementById('Ratigueya')
+    })
+
     btnMascota.addEventListener('click', seleccionarMascotaJugador)
     botonFuego.addEventListener('click',ataqueFuego)
     botonAgua.addEventListener('click',ataqueAgua)
@@ -56,29 +99,37 @@ function iniciarJuego(){
 function seleccionarMascotaJugador(){ 
     sectionSeleccionarAtaque.style.display='flex'  
     sectionSeleccionarMascota.style.display='none'
+
     if(inputHipodoge.checked){
-        spanMascotaJugador.innerHTML= 'Hipodoge'
+        spanMascotaJugador.innerHTML= inputHipodoge.id
+        mascotaJugador = inputHipodoge.id
     }else if(inputCapepo.checked){
-        spanMascotaJugador.innerHTML= 'Capipepo'
+        spanMascotaJugador.innerHTML= inputCapepo.id
+        mascotaJugador = inputCapepo.id
     }else if(inputRatigueya.checked){
-        spanMascotaJugador.innerHTML= 'Ratigueya'
+        spanMascotaJugador.innerHTML= inputRatigueya.id
+        mascotaJugador = inputRatigueya.id
     }else {
         alert("Selecciona una mascota")
     }
+    extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
 } 
 
+function  extraerAtaques(mascotaJugador){
+    let ataques
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            ataques = mokepones[i].ataques
+        }
+    }
+    mostrarAtaques(ataques)
+}
+
 /* Esta funcion permite saber que mascota eligió el enemigo */
 function seleccionarMascotaEnemigo(){
-    let mascotaAleatorio = aleatorio(1,3)
-
-    if(mascotaAleatorio==1){
-        spanMascotaEnemigo.innerHTML= 'Hipodoge'
-    }else if(mascotaAleatorio==2){
-        spanMascotaEnemigo.innerHTML= 'Capipepo'
-    }else {
-        spanMascotaEnemigo.innerHTML= 'Ratigueya'
-    }
+    let mascotaAleatorio = aleatorio(0,mokepones.length -1)
+        spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
 }
 
 //Funciones de ataque del jugador
@@ -97,7 +148,7 @@ function ataqueTierra() {
 
 /* Función para el ataque aleatorio del enemigo */
 function ataqueAleatorioEnemigo(){
-    let ataqueAleatorio = aleatorio(1,3)
+    let ataqueAleatorio = aleatorio(0,mokepones.length -1)
     
     if(ataqueAleatorio==1){
         ataqueEnemigo= 'FUEGO'
@@ -118,12 +169,9 @@ function crearMensaje(){
 
     sectioMensaje.innerHTML = resultado
     nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
-   
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo 
     ataqueDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataqueDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
-
-
 }
 
 /* Función que permite verificar el resultado del combate entre el jugador y el enemigo */
@@ -148,7 +196,7 @@ function combate(){
 /* Función que permite verificar que el jugador o el enemigo tengan 0 vidas para parar el juego */
 function revisarVidas(){
         if(vidasEnemigo == 0){
-            crearMensajeFinal('✨FELICITACIONES G A N A S T E!! ✨')
+            crearMensajeFinal('✨Felicitaciones G A N A S T E!! ✨')
         } else if(vidasJugador == 0){
             crearMensajeFinal('Lo siento, perdiste ☹')
         }

@@ -101,7 +101,7 @@ input:checked + label{
 
 .ataque{
     display: grid;
-    grid-template-columns: 100px 100px;
+    grid-template-columns: 160px 160px;
     justify-items: center;
     background-color: var(--fondo);
     margin: 10px;
@@ -109,6 +109,7 @@ input:checked + label{
 
 #vidas-jugador, #vidas-enemigo{
     font-size: 32px;
+    margin: 12px;
 }
 
 .ataque-jugador, .ataque-enemigo{
