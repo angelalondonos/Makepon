@@ -14,17 +14,18 @@ const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
 const contenedorAtaques = document.getElementById('contenedor-ataques')
 
 let mokepones = []
-let ataqueJugador
+let ataqueJugador =[]
 let ataqueEnemigo
 let opcionDeMokepones
-let botonFuego 
-let botonAgua
-let botonTierra
 let inputHipodoge
 let inputCapipepo
 let inputRatigueya
 let mascotaJugador
 let ataquesMokepon
+let botonFuego
+let botonAgua
+let botonTierra
+let botones = []
 let vidasJugador = 3
 let vidasEnemigo = 3
 
@@ -128,37 +129,52 @@ function  extraerAtaques(mascotaJugador){
 function mostrarAtaques(ataques){
     ataques.forEach((ataque) =>{
         ataquesMokepon = `
-        <button class="boton-ataque" id=${ataque.id}>${ataque.nombre}</button>
+        <button class="boton-ataque BAtaque" id=${ataque.id}>${ataque.nombre}</button>
         `
         contenedorAtaques.innerHTML += ataquesMokepon
     })
     botonFuego = document.getElementById('boton-fuego')
     botonAgua = document.getElementById('boton-agua')
     botonTierra = document.getElementById('boton-tierra')
-   
+    botones = document.querySelectorAll('.BAtaque')
 
-    botonFuego.addEventListener('click', ataqueFuego)
-    botonAgua.addEventListener('click', ataqueAgua)
-    botonTierra.addEventListener('click', ataqueTierra)
+}
+
+function secuenciaAtaque(){
+    botones.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+            if (e.target.textContent === '🔥') {
+                ataqueJugador.push('FUEGO')
+                console.log(ataqueJugador)
+                boton.style.background = '#A66CFF'   
+            } else if (e.target.textContent === '💧') {
+                ataqueJugador.push('AGUA')
+                console.log(ataqueJugador)
+                boton.style.background = '#A66CFF'
+            } else {
+                ataqueJugador.push('TIERRA')
+                console.log(ataqueJugador)
+                boton.style.background = '#A66CFF'
+            }
+        })
+    })
 }
 
 /* Esta funcion permite saber que mascota eligió el enemigo */
 function seleccionarMascotaEnemigo(){
     let mascotaAleatorio = aleatorio(0,mokepones.length -1)
         spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
+        secuenciaAtaque()
 }
 
 //Funciones de ataque del jugador
 function ataqueFuego() {
-    ataqueJugador = 'FUEGO'
     ataqueAleatorioEnemigo()
 }
 function ataqueAgua() {
-    ataqueJugador = 'AGUA'
     ataqueAleatorioEnemigo()
 }
 function ataqueTierra() {
-    ataqueJugador = 'TIERRA'
     ataqueAleatorioEnemigo()
 }
 
