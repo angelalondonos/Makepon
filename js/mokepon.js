@@ -1,9 +1,6 @@
 const sectionSeleccionarAtaque=document.getElementById('seleccionar-ataque')
 const sectionReiniciar=document.getElementById('reiniciar') 
 const btnMascota = document.getElementById('boton-mascota')
-const botonFuego=document.getElementById('boton-fuego')
-const botonAgua=document.getElementById('boton-agua')
-const botonTierra=document.getElementById('boton-tierra')
 const botonReiniciar=document.getElementById('boton-reiniciar')
 const sectionSeleccionarMascota=document.getElementById('seleccionar-mascota')
 const spanMascotaJugador = document.getElementById('mascota-jugador')
@@ -14,18 +11,22 @@ const sectioMensaje = document.getElementById('resultado')
 const ataqueDelJugador = document.getElementById('ataques-jugador')
 const ataqueDelEnemigo = document.getElementById('ataque-enemigo')
 const contenedorTarjetas = document.getElementById('contenedor-tarjetas')
+const contenedorAtaques = document.getElementById('contenedor-ataques')
 
-let mokepones=[]
+let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
-let resultado
 let opcionDeMokepones
+let botonFuego 
+let botonAgua
+let botonTierra
+let inputHipodoge
+let inputCapipepo
+let inputRatigueya
+let mascotaJugador
+let ataquesMokepon
 let vidasJugador = 3
 let vidasEnemigo = 3
-let inputHipodoge
-let mascotaJugador
-let inputCapepo 
-let inputRatigueya 
 
 window.addEventListener('load', iniciarJuego)
 
@@ -89,9 +90,7 @@ function iniciarJuego(){
     })
 
     btnMascota.addEventListener('click', seleccionarMascotaJugador)
-    botonFuego.addEventListener('click',ataqueFuego)
-    botonAgua.addEventListener('click',ataqueAgua)
-    botonTierra.addEventListener('click',ataqueTierra)
+
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
@@ -124,6 +123,23 @@ function  extraerAtaques(mascotaJugador){
         }
     }
     mostrarAtaques(ataques)
+}
+
+function mostrarAtaques(ataques){
+    ataques.forEach((ataque) =>{
+        ataquesMokepon = `
+        <button class="boton-ataque" id=${ataque.id}>${ataque.nombre}</button>
+        `
+        contenedorAtaques.innerHTML += ataquesMokepon
+    })
+    botonFuego = document.getElementById('boton-fuego')
+    botonAgua = document.getElementById('boton-agua')
+    botonTierra = document.getElementById('boton-tierra')
+   
+
+    botonFuego.addEventListener('click', ataqueFuego)
+    botonAgua.addEventListener('click', ataqueAgua)
+    botonTierra.addEventListener('click', ataqueTierra)
 }
 
 /* Esta funcion permite saber que mascota eligió el enemigo */
