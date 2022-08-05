@@ -15,13 +15,14 @@ const contenedorAtaques = document.getElementById('contenedor-ataques')
 
 let mokepones = []
 let ataqueJugador =[]
-let ataqueEnemigo
+let ataqueEnemigo =[]
 let opcionDeMokepones
 let inputHipodoge
 let inputCapipepo
 let inputRatigueya
 let mascotaJugador
 let ataquesMokepon
+let ataquesMokeponEnemigo
 let botonFuego
 let botonAgua
 let botonTierra
@@ -137,7 +138,6 @@ function mostrarAtaques(ataques){
     botonAgua = document.getElementById('boton-agua')
     botonTierra = document.getElementById('boton-tierra')
     botones = document.querySelectorAll('.BAtaque')
-
 }
 
 function secuenciaAtaque(){
@@ -156,15 +156,19 @@ function secuenciaAtaque(){
                 console.log(ataqueJugador)
                 boton.style.background = '#A66CFF'
             }
+            ataqueAleatorioEnemigo()
         })
     })
+    
 }
 
 /* Esta funcion permite saber que mascota eligió el enemigo */
 function seleccionarMascotaEnemigo(){
-    let mascotaAleatorio = aleatorio(0,mokepones.length -1)
-        spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatorio].nombre
-        secuenciaAtaque()
+    let mascotaAleatoria = aleatorio(0, mokepones.length -1)
+
+    spanMascotaEnemigo.innerHTML = mokepones[mascotaAleatoria].nombre
+    ataquesMokeponEnemigo = mokepones[mascotaAleatoria].ataques
+    secuenciaAtaque()
 }
 
 //Funciones de ataque del jugador
@@ -180,16 +184,16 @@ function ataqueTierra() {
 
 /* Función para el ataque aleatorio del enemigo */
 function ataqueAleatorioEnemigo(){
-    let ataqueAleatorio = aleatorio(0,mokepones.length -1)
+    let ataqueAleatorio = aleatorio(0,ataquesMokeponEnemigo.length -1)
     
-    if(ataqueAleatorio==1){
-        ataqueEnemigo= 'FUEGO'
-    }else if(ataqueAleatorio==2){
-        ataqueEnemigo= 'AGUA'
-    }else {
-        ataqueEnemigo= 'TIERRA'
-    }    
-
+    if (ataqueAleatorio == 0 || ataqueAleatorio ==1) {
+        ataqueEnemigo.push('FUEGO')
+    } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
+        ataqueEnemigo.push('AGUA')
+    } else {
+        ataqueEnemigo.push('TIERRA')
+    }
+    console.log(ataqueEnemigo)
     combate()
 } 
 
