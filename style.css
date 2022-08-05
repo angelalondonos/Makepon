@@ -57,6 +57,7 @@ input:checked + label{
 
 .tarjetas{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .boton-principal, #boton-reiniciar{

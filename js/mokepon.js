@@ -48,6 +48,9 @@ class Mokepon{
 let hipodoge=new Mokepon('Hipodoge','./imagenes/hipodoge.webp',5)
 let capipepo=new Mokepon('Capipepo','./imagenes/capipepo.webp',5)
 let ratigueya=new Mokepon('Ratigueya','./imagenes/ratigueya.webp',5)
+let tucapalma=new Mokepon('Tucapalma','./imagenes/tucapalma.png',5)
+let pydos=new Mokepon('Pydos','./imagenes/pydos.png',5)
+let langostelvis=new Mokepon('Langostelvis','./imagenes/langostelvis.png',5)
 
 hipodoge.ataques.push(
     { nombre: '💧', id: 'boton-agua' },
@@ -73,7 +76,31 @@ ratigueya.ataques.push(
     { nombre: '🌱', id: 'boton-tierra' },
 )
 
-mokepones.push(hipodoge,capipepo,ratigueya)
+tucapalma.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+pydos.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+langostelvis.ataques.push(
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '🔥', id: 'boton-fuego' },
+    { nombre: '💧', id: 'boton-agua' },
+    { nombre: '🌱', id: 'boton-tierra' },
+)
+
+mokepones.push(hipodoge,capipepo,ratigueya, tucapalma, pydos, langostelvis)
 
 
 /* Carga los elementos del HTML */
@@ -114,6 +141,15 @@ function seleccionarMascotaJugador(){
     }else if(inputRatigueya.checked){
         spanMascotaJugador.innerHTML= inputRatigueya.id
         mascotaJugador = inputRatigueya.id
+    }else if(inputRatigueya.checked){
+        spanMascotaJugador.innerHTML= inputRatigueya.id
+        mascotaJugador = inputRatigueya.id
+    }else if(inputRatigueya.checked){
+        spanMascotaJugador.innerHTML= inputRatigueya.id
+        mascotaJugador = inputRatigueya.id
+    }else if(inputRatigueya.checked){
+        spanMascotaJugador.innerHTML= inputRatigueya.id
+        mascotaJugador = inputRatigueya.id
     }else {
         alert("Selecciona una mascota")
     }
@@ -149,16 +185,16 @@ function secuenciaAtaque(){
         boton.addEventListener('click', (e) => {
             if (e.target.textContent === '🔥') {
                 ataqueJugador.push('FUEGO')
-                console.log(ataqueJugador)
-                boton.style.background = '#A66CFF'   
+                boton.style.background = '#A66CFF'
+                boton.disabled = true   
             } else if (e.target.textContent === '💧') {
                 ataqueJugador.push('AGUA')
-                console.log(ataqueJugador)
                 boton.style.background = '#A66CFF'
+                boton.disabled = true   
             } else {
                 ataqueJugador.push('TIERRA')
-                console.log(ataqueJugador)
                 boton.style.background = '#A66CFF'
+                boton.disabled = true   
             }
             ataqueAleatorioEnemigo()
         })
@@ -197,7 +233,6 @@ function ataqueAleatorioEnemigo(){
     } else {
         ataqueEnemigo.push('TIERRA')
     }
-    console.log(ataqueEnemigo)
     iniciarPelea()
 }
 
@@ -219,7 +254,6 @@ function crearMensaje(){
     ataqueDelJugador.appendChild(nuevoAtaqueDelJugador)
     ataqueDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
 }
-
 
 function indexAmbosOponente(jugador, enemigo) {
     indexAtaqueJugador = ataqueJugador[jugador]
@@ -276,10 +310,7 @@ function revisarVidas(){
 function crearMensajeFinal(resultadoFinal){
         
     sectionMensaje.innerHTML = resultadoFinal
-        botonFuego.disabled = true
-        botonAgua.disabled = true
-        botonTierra.disabled = true
-        sectionReiniciar.style.display='block'
+         sectionReiniciar.style.display='block'
 
 }
 
