@@ -3,7 +3,7 @@
 **Mokepon** es un juego de ataque donde varias mascotas pueden competir con fuego, agua y tierra
 
 ## Ver está página:
-https://angelalondonos.github.io/Mokepon/mokepon.html 
+https://angelalondonos.github.io/Mokepon
 
 ## Tecnologías utilizadas:
 Esta aplicación está construida en **Javascript** con **HTML** y **CSS**
